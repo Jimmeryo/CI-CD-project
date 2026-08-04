@@ -32,8 +32,20 @@ jobs:
         run: kubectl apply -f ./k8s-deployment.yaml
       - name: Wait for rollout
         run: kubectl rollout status deployment/nodejs-app --timeout=60s
+      - name: Debug
+        if: always()
+        run: |
+          kubectl get pods -o wide
+          kubectl get svc nodejs-app -o wide
+          kubectl get endpoints nodejs-app
+          kubectl describe svc nodejs-app
+          kubectl logs deployment/nodejs-app
       - name: Smoke test
-        run: curl --fail --silent --show-error $(minikube service nodejs-app --url)
+        if: always()
+        run: |
+          curl --fail --silent --show-error \
+               --retry 5 --retry-delay 3 --retry-connrefused \
+               $(minikube service nodejs-app --url)
       - name: Test service URLs
         run: |
           minikube service list
