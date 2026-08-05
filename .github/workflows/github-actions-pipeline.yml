@@ -2,18 +2,16 @@ name: Deploy to Minikube using GitHub Actions
 
 on:
   push:
-
+    branches:
+      - main
+      
 jobs:
   job1:
     runs-on: ubuntu-latest
     name: build Node.js Docker Image and deploy to minikube
-    defaults:
-      run:
-        working-directory: github-project
+
     steps:
       - uses: actions/checkout@v4
-        with:
-          sparse-checkout: github-project
       - name: Start Minikube
         uses: medyagh/setup-minikube@master
       - name: Try the cluster !
