@@ -2,9 +2,6 @@ name: Deploy to Minikube using GitHub Actions
 
 on:
   push:
-    paths:
-      - 'github-project/**'
-      - '.github/workflows/github-actions-pipeline.yml'
 
 jobs:
   job1:
