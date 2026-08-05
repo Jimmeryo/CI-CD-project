@@ -8,7 +8,7 @@ test-job:
     - echo "Running tests for GitLab project..."
   rules:
     - changes:
-        - "gitlab-project/**/*" # Тригеритися тільки на зміни в цій папці
+        - "gitlab-project/**/*"
 
 build-job:
   stage: build
@@ -16,4 +16,4 @@ build-job:
     - echo "Building GitLab project..."
   rules:
     - changes:
-        - "gitlab-project/**/*" # Тригеритися тільки на зміни в цій папці
+        - "gitlab-project/**/*"
